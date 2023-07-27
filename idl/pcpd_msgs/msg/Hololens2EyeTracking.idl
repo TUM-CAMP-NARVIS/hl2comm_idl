@@ -1,0 +1,41 @@
+#ifndef PCPD_MSG_HL2EYETRACKING
+#define PCPD_MSG_HL2EYETRACKING
+
+#include "geometry_msgs/msg/Vector3.idl"
+
+module pcpd_msgs {
+  module msg {
+
+    typedef float float__16[16];
+
+    @verbatim (language="comment", text=
+      "This represents a sample from the hololens eyetracking.")
+    struct Hololens2EyeTracking {
+      @verbatim (language="comment", text=
+        "Realtime eye-tracking measurement for a specific timestamp.")
+
+
+      string client_id;
+      uint64 timestamp;
+      float__16 pose;
+
+
+      geometry_msgs::msg::Vector3 c_origin;
+      geometry_msgs::msg::Vector3 c_direction;
+      
+      geometry_msgs::msg::Vector3 l_origin;
+      geometry_msgs::msg::Vector3 l_direction;
+      
+      geometry_msgs::msg::Vector3 r_origin;
+      geometry_msgs::msg::Vector3 r_direction;
+      
+      float l_openness;
+      float r_openness;
+      
+      float vergence_distance;
+      uint32 valid;
+    };
+  };
+};
+
+#endif

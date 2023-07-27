@@ -152,6 +152,8 @@ set(HL2COMM_IDL_IDL_PCPD
         "idl/pcpd_msgs/msg/Instance.idl"
         "idl/pcpd_msgs/msg/DataflowBufferInfo.idl"
         "idl/pcpd_msgs/msg/CameraSensor.idl"
+        "idl/pcpd_msgs/msg/Hololens2EyeTracking.idl"
+        "idl/pcpd_msgs/msg/Hololens2HandTracking.idl"
         )
 
 add_definitions("-DEPROSIMA_USER_DLL_EXPORT")
@@ -241,7 +243,8 @@ add_library(hl2comm_idl_pcpd
         ${HL2COMM_IDL_BUILTIN_INTERFACES_HDRS}
         )
 target_link_libraries(hl2comm_idl_pcpd ${DDS_LIBRARIES})
-add_dependencies(hl2comm_idl_geometry hl2comm_idl_std)
+add_dependencies(hl2comm_idl_pcpd hl2comm_idl_geometry hl2comm_idl_std)
+target_link_libraries(hl2comm_idl_pcpd hl2comm_idl_geometry hl2comm_idl_std)
 # probably std at some point
 target_include_directories(hl2comm_idl_pcpd PUBLIC
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>/include
@@ -479,3 +482,7 @@ install(EXPORT hl2comm_idl_unique_identifierConfig DESTINATION share/hl2comm_idl
 export(TARGETS hl2comm_idl_unique_identifier FILE hl2comm_idl_unique_identifierConfig.cmake)
 install(FILES ${HL2COMM_IDL_UNIQUE_IDENTIFIER_HDRS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/unique_identifier_msgs/msg)
 install(FILES ${HL2COMM_IDL_IDL_UNIQUE_IDENTIFIER} DESTINATION share/pcpd_dds/unique_identifier_msgs/msg)
+
+if (NOT WITH_DDS)
+  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/fastrtps/include/fastrtps/utils/fixed_size_string.hpp DESTINATION include/fastrtps/utils)
+endif()

@@ -1,5 +1,5 @@
-#ifndef PCPD_MSG_SENSOR
-#define PCPD_MSG_SENSOR
+#ifndef PCPD_MSG_BUFFERINFO
+#define PCPD_MSG_BUFFERINFO
 
 module pcpd_msgs {
   module msg {
