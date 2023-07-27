@@ -157,13 +157,12 @@ set(HL2COMM_IDL_IDL_PCPD
         )
 
 if (BUILD_SHARED_LIBS)
-  add_definitions("-DEPROSIMA_USER_DLL_EXPORT")
-  add_definitions("-DFASTCDR_DYN_LINK")
+  add_definitions("-DEPROSIMA_USER_DLL_EXPORT" "-DFASTCDR_DYN_LINK")
 else()
   add_definitions("-DFASTCDR_STATIC_LINK")
 endif()
 
-FASTDDS_GENERATE_CPP("builtin_interfaces" HL2COMM_IDL_BUILTIN_INTERFACES_SRC HL2COMM_IDL_BUILTIN_INTERFACES_HDRS "" ${HL2COMM_IDL_IDL_BUILTIN_INTERFACES})
+FASTDDS_GENERATE_CPP("builtin_interfaces" HL2COMM_IDL_BUILTIN_INTERFACES_SRC HL2COMM_IDL_BUILTIN_INTERFACES_HDRS HL2COMM_IDL_BUILTIN_INTERFACES_EXPORT "" ${HL2COMM_IDL_IDL_BUILTIN_INTERFACES})
 install(FILES ${HL2COMM_IDL_IDL_BUILTIN_INTERFACES} DESTINATION share/pcpd_dds/builtin_interfaces/msg)
 install(FILES ${HL2COMM_IDL_BUILTIN_INTERFACES_HDRS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/builtin_interfaces/msg)
 
@@ -171,7 +170,7 @@ install(FILES ${HL2COMM_IDL_BUILTIN_INTERFACES_HDRS} DESTINATION ${CMAKE_INSTALL
 #
 #
 # hl2comm_idl_std
-FASTDDS_GENERATE_CPP("std_msgs" HL2COMM_IDL_STD_SRC HL2COMM_IDL_STD_HDRS "" ${HL2COMM_IDL_IDL_STD})
+FASTDDS_GENERATE_CPP("std_msgs" HL2COMM_IDL_STD_SRC HL2COMM_IDL_STD_HDRS HL2COMM_IDL_STD_EXPORT "" ${HL2COMM_IDL_IDL_STD})
 add_library(hl2comm_idl_std
         ${HL2COMM_IDL_STD_SRC}
         ${HL2COMM_IDL_STD_HDRS}
@@ -186,7 +185,7 @@ target_include_directories(hl2comm_idl_std PUBLIC
         ${PROJECT_SOURCE_DIR}/include
         )
 set_target_properties(hl2comm_idl_std PROPERTIES CXX_STANDARD 17)
-
+target_compile_definitions(hl2comm_idl_std PRIVATE ${HL2COMM_IDL_STD_EXPORT})
 
 install(TARGETS hl2comm_idl_std EXPORT hl2comm_idl_stdConfig
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -204,7 +203,7 @@ install(FILES ${HL2COMM_IDL_IDL_STD} DESTINATION share/pcpd_dds/std_msgs/msg)
 #
 #
 # hl2comm_idl_geometry
-FASTDDS_GENERATE_CPP("geometry_msgs" HL2COMM_IDL_GEOMETRY_SRC HL2COMM_IDL_GEOMETRY_HDRS "hl2comm_idl_std" ${HL2COMM_IDL_IDL_GEOMETRY})
+FASTDDS_GENERATE_CPP("geometry_msgs" HL2COMM_IDL_GEOMETRY_SRC HL2COMM_IDL_GEOMETRY_HDRS HL2COMM_IDL_GEOMETRY_EXPORT "hl2comm_idl_std" ${HL2COMM_IDL_IDL_GEOMETRY})
 add_library(hl2comm_idl_geometry
         ${HL2COMM_IDL_GEOMETRY_SRC}
         ${HL2COMM_IDL_GEOMETRY_HDRS}
@@ -221,7 +220,7 @@ target_include_directories(hl2comm_idl_geometry PUBLIC
         ${PROJECT_SOURCE_DIR}/include
         )
 set_target_properties(hl2comm_idl_geometry PROPERTIES CXX_STANDARD 17)
-
+target_compile_definitions(hl2comm_idl_geometry PRIVATE ${HL2COMM_IDL_GEOMETRY_EXPORT})
 
 install(TARGETS hl2comm_idl_geometry EXPORT hl2comm_idl_geometryConfig
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -240,7 +239,7 @@ install(FILES ${HL2COMM_IDL_IDL_GEOMETRY} DESTINATION share/pcpd_dds/geometry_ms
 #
 #
 # hl2comm_idl_pcpd
-FASTDDS_GENERATE_CPP("pcpd_msgs" HL2COMM_IDL_PCPD_SRC HL2COMM_IDL_PCPD_HDRS "hl2comm_idl_geometry" ${HL2COMM_IDL_IDL_PCPD})
+FASTDDS_GENERATE_CPP("pcpd_msgs" HL2COMM_IDL_PCPD_SRC HL2COMM_IDL_PCPD_HDRS HL2COMM_IDL_PCPD_EXPORT "hl2comm_idl_geometry" ${HL2COMM_IDL_IDL_PCPD})
 add_library(hl2comm_idl_pcpd
         ${HL2COMM_IDL_PCPD_SRC}
         ${HL2COMM_IDL_PCPD_HDRS}
@@ -258,7 +257,7 @@ target_include_directories(hl2comm_idl_pcpd PUBLIC
         ${PROJECT_SOURCE_DIR}/include
         )
 set_target_properties(hl2comm_idl_pcpd PROPERTIES CXX_STANDARD 17)
-
+target_compile_definitions(hl2comm_idl_pcpd PRIVATE ${HL2COMM_IDL_PCPD_EXPORT})
 
 install(TARGETS hl2comm_idl_pcpd EXPORT hl2comm_idl_pcpdConfig
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -277,7 +276,7 @@ install(FILES ${HL2COMM_IDL_IDL_PCPD} DESTINATION share/pcpd_dds/pcpd_msgs/msg)
 #
 #
 # hl2comm_idl_rosgraph
-FASTDDS_GENERATE_CPP("rosgraph_msgs" HL2COMM_IDL_ROSGRAPH_SRC HL2COMM_IDL_ROSGRAPH_HDRS "hl2comm_idl_pcpd" ${HL2COMM_IDL_IDL_ROSGRAPH})
+FASTDDS_GENERATE_CPP("rosgraph_msgs" HL2COMM_IDL_ROSGRAPH_SRC HL2COMM_IDL_ROSGRAPH_HDRS HL2COMM_IDL_ROSGRAPH_EXPORT "hl2comm_idl_pcpd" ${HL2COMM_IDL_IDL_ROSGRAPH})
 add_library(hl2comm_idl_rosgraph
         ${HL2COMM_IDL_ROSGRAPH_SRC}
         ${HL2COMM_IDL_ROSGRAPH_HDRS}
@@ -292,7 +291,7 @@ target_include_directories(hl2comm_idl_rosgraph PUBLIC
         ${PROJECT_SOURCE_DIR}/include
         )
 set_target_properties(hl2comm_idl_rosgraph PROPERTIES CXX_STANDARD 17)
-
+target_compile_definitions(hl2comm_idl_rosgraph PRIVATE ${HL2COMM_IDL_ROSGRAPH_EXPORT})
 
 install(TARGETS hl2comm_idl_rosgraph EXPORT hl2comm_idl_rosgraphConfig
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -311,7 +310,7 @@ install(FILES ${HL2COMM_IDL_IDL_ROSGRAPH} DESTINATION share/pcpd_dds/rosgraph_ms
 #
 #
 # hl2comm_idl_sensor
-FASTDDS_GENERATE_CPP("sensor_msgs" HL2COMM_IDL_SENSOR_SRC HL2COMM_IDL_SENSOR_HDRS "hl2comm_idl_rosgraph" ${HL2COMM_IDL_IDL_SENSOR})
+FASTDDS_GENERATE_CPP("sensor_msgs" HL2COMM_IDL_SENSOR_SRC HL2COMM_IDL_SENSOR_HDRS HL2COMM_IDL_SENSOR_EXPORT "hl2comm_idl_rosgraph" ${HL2COMM_IDL_IDL_SENSOR})
 add_library(hl2comm_idl_sensor
         ${HL2COMM_IDL_SENSOR_SRC}
         ${HL2COMM_IDL_SENSOR_HDRS}
@@ -330,7 +329,7 @@ target_include_directories(hl2comm_idl_sensor PUBLIC
         ${PROJECT_SOURCE_DIR}/include
         )
 set_target_properties(hl2comm_idl_sensor PROPERTIES CXX_STANDARD 17)
-
+target_compile_definitions(hl2comm_idl_sensor PRIVATE ${HL2COMM_IDL_SENSOR_EXPORT})
 
 install(TARGETS hl2comm_idl_sensor EXPORT hl2comm_idl_sensorConfig
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -349,7 +348,7 @@ install(FILES ${HL2COMM_IDL_IDL_SENSOR} DESTINATION share/pcpd_dds/sensor_msgs/m
 #
 #
 # hl2comm_idl_shape
-FASTDDS_GENERATE_CPP("shape_msgs" HL2COMM_IDL_SHAPE_SRC HL2COMM_IDL_SHAPE_HDRS "hl2comm_idl_sensor" ${HL2COMM_IDL_IDL_SHAPE})
+FASTDDS_GENERATE_CPP("shape_msgs" HL2COMM_IDL_SHAPE_SRC HL2COMM_IDL_SHAPE_HDRS HL2COMM_IDL_SHAPE_EXPORT "hl2comm_idl_sensor" ${HL2COMM_IDL_IDL_SHAPE})
 add_library(hl2comm_idl_shape
         ${HL2COMM_IDL_SHAPE_SRC}
         ${HL2COMM_IDL_SHAPE_HDRS}
@@ -368,7 +367,7 @@ target_include_directories(hl2comm_idl_shape PUBLIC
         ${PROJECT_SOURCE_DIR}/include
         )
 set_target_properties(hl2comm_idl_shape PROPERTIES CXX_STANDARD 17)
-
+target_compile_definitions(hl2comm_idl_shape PRIVATE ${HL2COMM_IDL_SHAPE_EXPORT})
 
 install(TARGETS hl2comm_idl_shape EXPORT hl2comm_idl_shapeConfig
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -389,7 +388,7 @@ install(FILES ${HL2COMM_IDL_IDL_SHAPE} DESTINATION share/pcpd_dds/shape_msgs/msg
 #
 #
 # hl2comm_idl_statistics
-FASTDDS_GENERATE_CPP("statistics_msgs" HL2COMM_IDL_STATISTICS_SRC HL2COMM_IDL_STATISTICS_HDRS "hl2comm_idl_shape" ${HL2COMM_IDL_IDL_STATISTICS})
+FASTDDS_GENERATE_CPP("statistics_msgs" HL2COMM_IDL_STATISTICS_SRC HL2COMM_IDL_STATISTICS_HDRS HL2COMM_IDL_STATISTICS_EXPORT "hl2comm_idl_shape" ${HL2COMM_IDL_IDL_STATISTICS})
 add_library(hl2comm_idl_statistics
         ${HL2COMM_IDL_STATISTICS_SRC}
         ${HL2COMM_IDL_STATISTICS_HDRS}
@@ -404,7 +403,7 @@ target_include_directories(hl2comm_idl_statistics PUBLIC
         ${PROJECT_SOURCE_DIR}/include
         )
 set_target_properties(hl2comm_idl_statistics PROPERTIES CXX_STANDARD 17)
-
+target_compile_definitions(hl2comm_idl_statistics PRIVATE ${HL2COMM_IDL_STATISTICS_EXPORT})
 
 install(TARGETS hl2comm_idl_statistics EXPORT hl2comm_idl_statisticsConfig
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -424,7 +423,7 @@ install(FILES ${HL2COMM_IDL_IDL_STATISTICS} DESTINATION share/pcpd_dds/statistic
 #
 #
 # hl2comm_idl_tf2
-FASTDDS_GENERATE_CPP("tf2_msgs" HL2COMM_IDL_TF2_SRC HL2COMM_IDL_TF2_HDRS "hl2comm_idl_statistics" ${HL2COMM_IDL_IDL_TF2})
+FASTDDS_GENERATE_CPP("tf2_msgs" HL2COMM_IDL_TF2_SRC HL2COMM_IDL_TF2_HDRS HL2COMM_IDL_TF2_EXPORT "hl2comm_idl_statistics" ${HL2COMM_IDL_IDL_TF2})
 add_library(hl2comm_idl_tf2
         ${HL2COMM_IDL_TF2_SRC}
         ${HL2COMM_IDL_TF2_HDRS}
@@ -443,7 +442,7 @@ target_include_directories(hl2comm_idl_tf2 PUBLIC
         ${PROJECT_SOURCE_DIR}/include
         )
 set_target_properties(hl2comm_idl_tf2 PROPERTIES CXX_STANDARD 17)
-
+target_compile_definitions(hl2comm_idl_tf2 PRIVATE ${HL2COMM_IDL_TF2_EXPORT})
 
 install(TARGETS hl2comm_idl_tf2 EXPORT hl2comm_idl_tf2Config
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -461,7 +460,7 @@ install(FILES ${HL2COMM_IDL_IDL_TF2} DESTINATION share/pcpd_dds/tf2_msgs/msg)
 #
 #
 # hl2comm_idl_unique_identifier
-FASTDDS_GENERATE_CPP("unique_identifier_msgs" HL2COMM_IDL_UNIQUE_IDENTIFIER_SRC HL2COMM_IDL_UNIQUE_IDENTIFIER_HDRS "hl2comm_idl_tf2" ${HL2COMM_IDL_IDL_UNIQUE_IDENTIFIER})
+FASTDDS_GENERATE_CPP("unique_identifier_msgs" HL2COMM_IDL_UNIQUE_IDENTIFIER_SRC HL2COMM_IDL_UNIQUE_IDENTIFIER_HDRS HL2COMM_IDL_UNIQUE_IDENTIFIER_EXPORT "hl2comm_idl_tf2" ${HL2COMM_IDL_IDL_UNIQUE_IDENTIFIER})
 add_library(hl2comm_idl_unique_identifier
         ${HL2COMM_IDL_UNIQUE_IDENTIFIER_SRC}
         ${HL2COMM_IDL_UNIQUE_IDENTIFIER_HDRS}
@@ -476,7 +475,7 @@ target_include_directories(hl2comm_idl_unique_identifier PUBLIC
         ${PROJECT_SOURCE_DIR}/include
         )
 set_target_properties(hl2comm_idl_unique_identifier PROPERTIES CXX_STANDARD 17)
-
+target_compile_definitions(hl2comm_idl_unique_identifier PRIVATE ${HL2COMM_IDL_UNIQUE_IDENTIFIER_EXPORT})
 
 install(TARGETS hl2comm_idl_unique_identifier EXPORT hl2comm_idl_unique_identifierConfig
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -488,6 +487,8 @@ export(TARGETS hl2comm_idl_unique_identifier FILE hl2comm_idl_unique_identifierC
 install(FILES ${HL2COMM_IDL_UNIQUE_IDENTIFIER_HDRS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/unique_identifier_msgs/msg)
 install(FILES ${HL2COMM_IDL_IDL_UNIQUE_IDENTIFIER} DESTINATION share/pcpd_dds/unique_identifier_msgs/msg)
 
+
+# generated cpp/h files need one import from fastrtps, which we provide to avoid pulling the dependency, if it should be build without
 if (NOT WITH_DDS)
   install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/fastrtps/include/fastrtps/utils/fixed_size_string.hpp DESTINATION include/fastrtps/utils)
 endif()
