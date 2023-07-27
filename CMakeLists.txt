@@ -156,7 +156,12 @@ set(HL2COMM_IDL_IDL_PCPD
         "idl/pcpd_msgs/msg/Hololens2HandTracking.idl"
         )
 
-add_definitions("-DEPROSIMA_USER_DLL_EXPORT")
+if (BUILD_SHARED_LIBS)
+  add_definitions("-DEPROSIMA_USER_DLL_EXPORT")
+  add_definitions("-DFASTCDR_DYN_LINK")
+else()
+  add_definitions("-DFASTCDR_STATIC_LINK")
+endif()
 
 FASTDDS_GENERATE_CPP("builtin_interfaces" HL2COMM_IDL_BUILTIN_INTERFACES_SRC HL2COMM_IDL_BUILTIN_INTERFACES_HDRS "" ${HL2COMM_IDL_IDL_BUILTIN_INTERFACES})
 install(FILES ${HL2COMM_IDL_IDL_BUILTIN_INTERFACES} DESTINATION share/pcpd_dds/builtin_interfaces/msg)
