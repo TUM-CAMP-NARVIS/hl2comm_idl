@@ -7,8 +7,14 @@ option(FASTDDS_GEN_JAR_PATH "FastDDS Generator jar path")
 
 # Find requirements
 find_package(fastcdr REQUIRED)
+
+set (DDS_LIBRARIES)
 if (WITH_DDS)
-find_package(fastdds REQUIRED)
+  find_package(fastdds REQUIRED)
+  set (DDS_LIBRARIES ${DDS_LIBRARIES})
+else()
+  set (DDS_LIBRARIES fastcdr)
+  include_directories("${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/fastrtps/include")
 endif()
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/FastDDSGeneratorMacros.cmake)
@@ -165,7 +171,7 @@ add_library(hl2comm_idl_std
         ${HL2COMM_IDL_BUILTIN_INTERFACES_SRC}
         ${HL2COMM_IDL_BUILTIN_INTERFACES_HDRS}
         )
-target_link_libraries(hl2comm_idl_std fast-dds::fast-dds tinyxml2::tinyxml2)
+target_link_libraries(hl2comm_idl_std ${DDS_LIBRARIES})
 target_include_directories(hl2comm_idl_std PUBLIC
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>/include
         $<INSTALL_INTERFACE:include>
@@ -198,7 +204,7 @@ add_library(hl2comm_idl_geometry
         ${HL2COMM_IDL_BUILTIN_INTERFACES_SRC}
         ${HL2COMM_IDL_BUILTIN_INTERFACES_HDRS}
         )
-target_link_libraries(hl2comm_idl_geometry fast-dds::fast-dds tinyxml2::tinyxml2)
+target_link_libraries(hl2comm_idl_geometry ${DDS_LIBRARIES})
 add_dependencies(hl2comm_idl_geometry hl2comm_idl_std)
 target_link_libraries(hl2comm_idl_geometry hl2comm_idl_std)
 target_include_directories(hl2comm_idl_geometry PUBLIC
@@ -234,7 +240,7 @@ add_library(hl2comm_idl_pcpd
         ${HL2COMM_IDL_BUILTIN_INTERFACES_SRC}
         ${HL2COMM_IDL_BUILTIN_INTERFACES_HDRS}
         )
-target_link_libraries(hl2comm_idl_pcpd fast-dds::fast-dds tinyxml2::tinyxml2)
+target_link_libraries(hl2comm_idl_pcpd ${DDS_LIBRARIES})
 add_dependencies(hl2comm_idl_geometry hl2comm_idl_std)
 # probably std at some point
 target_include_directories(hl2comm_idl_pcpd PUBLIC
@@ -270,7 +276,7 @@ add_library(hl2comm_idl_rosgraph
         ${HL2COMM_IDL_BUILTIN_INTERFACES_SRC}
         ${HL2COMM_IDL_BUILTIN_INTERFACES_HDRS}
         )
-target_link_libraries(hl2comm_idl_rosgraph fast-dds::fast-dds tinyxml2::tinyxml2)
+target_link_libraries(hl2comm_idl_rosgraph ${DDS_LIBRARIES})
 target_include_directories(hl2comm_idl_rosgraph PUBLIC
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>/include
         $<INSTALL_INTERFACE:include>
@@ -304,7 +310,7 @@ add_library(hl2comm_idl_sensor
         ${HL2COMM_IDL_BUILTIN_INTERFACES_SRC}
         ${HL2COMM_IDL_BUILTIN_INTERFACES_HDRS}
         )
-target_link_libraries(hl2comm_idl_sensor fast-dds::fast-dds tinyxml2::tinyxml2)
+target_link_libraries(hl2comm_idl_sensor ${DDS_LIBRARIES})
 add_dependencies(hl2comm_idl_sensor hl2comm_idl_std)
 add_dependencies(hl2comm_idl_sensor hl2comm_idl_geometry)
 target_link_libraries(hl2comm_idl_sensor hl2comm_idl_std)
@@ -342,7 +348,7 @@ add_library(hl2comm_idl_shape
         ${HL2COMM_IDL_BUILTIN_INTERFACES_SRC}
         ${HL2COMM_IDL_BUILTIN_INTERFACES_HDRS}
         )
-target_link_libraries(hl2comm_idl_shape fast-dds::fast-dds tinyxml2::tinyxml2)
+target_link_libraries(hl2comm_idl_shape ${DDS_LIBRARIES})
 add_dependencies(hl2comm_idl_shape hl2comm_idl_std)
 add_dependencies(hl2comm_idl_shape hl2comm_idl_geometry)
 target_link_libraries(hl2comm_idl_shape hl2comm_idl_std)
@@ -382,7 +388,7 @@ add_library(hl2comm_idl_statistics
         ${HL2COMM_IDL_BUILTIN_INTERFACES_SRC}
         ${HL2COMM_IDL_BUILTIN_INTERFACES_HDRS}
         )
-target_link_libraries(hl2comm_idl_statistics fast-dds::fast-dds tinyxml2::tinyxml2)
+target_link_libraries(hl2comm_idl_statistics ${DDS_LIBRARIES})
 target_include_directories(hl2comm_idl_statistics PUBLIC
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>/include
         $<INSTALL_INTERFACE:include>
@@ -417,7 +423,7 @@ add_library(hl2comm_idl_tf2
         ${HL2COMM_IDL_BUILTIN_INTERFACES_SRC}
         ${HL2COMM_IDL_BUILTIN_INTERFACES_HDRS}
         )
-target_link_libraries(hl2comm_idl_tf2 fast-dds::fast-dds tinyxml2::tinyxml2)
+target_link_libraries(hl2comm_idl_tf2 ${DDS_LIBRARIES})
 add_dependencies(hl2comm_idl_tf2 hl2comm_idl_std)
 add_dependencies(hl2comm_idl_tf2 hl2comm_idl_geometry)
 target_link_libraries(hl2comm_idl_tf2 hl2comm_idl_std)
@@ -454,7 +460,7 @@ add_library(hl2comm_idl_unique_identifier
         ${HL2COMM_IDL_BUILTIN_INTERFACES_SRC}
         ${HL2COMM_IDL_BUILTIN_INTERFACES_HDRS}
         )
-target_link_libraries(hl2comm_idl_unique_identifier fast-dds::fast-dds tinyxml2::tinyxml2)
+target_link_libraries(hl2comm_idl_unique_identifier ${DDS_LIBRARIES})
 target_include_directories(hl2comm_idl_unique_identifier PUBLIC
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>/include
         $<INSTALL_INTERFACE:include>
@@ -473,41 +479,3 @@ install(EXPORT hl2comm_idl_unique_identifierConfig DESTINATION share/hl2comm_idl
 export(TARGETS hl2comm_idl_unique_identifier FILE hl2comm_idl_unique_identifierConfig.cmake)
 install(FILES ${HL2COMM_IDL_UNIQUE_IDENTIFIER_HDRS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/unique_identifier_msgs/msg)
 install(FILES ${HL2COMM_IDL_IDL_UNIQUE_IDENTIFIER} DESTINATION share/pcpd_dds/unique_identifier_msgs/msg)
-
-
-
-#
-#
-#
-# apps
-add_executable(ros2_listener apps/Ros2Listener.cpp apps/Ros2Listener.h)
-target_link_libraries(ros2_listener fast-dds::fast-dds tinyxml2::tinyxml2)
-target_link_libraries(ros2_listener
-        hl2comm_idl_std
-        hl2comm_idl_sensor
-        hl2comm_idl_geometry
-        hl2comm_idl_shape
-        hl2comm_idl_tf2
-        hl2comm_idl_rosgraph
-        hl2comm_idl_statistics
-        hl2comm_idl_unique_identifier
-        hl2comm_idl_pcpd
-        )
-target_include_directories(ros2_listener PUBLIC
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>/include
-        $<INSTALL_INTERFACE:include>
-        PRIVATE
-        ${PROJECT_SOURCE_DIR}/include/builtin_interfaces/msg
-        ${PROJECT_SOURCE_DIR}/include/geometry_msgs/msg
-        ${PROJECT_SOURCE_DIR}/include/rosgraph_msgs/msg
-        ${PROJECT_SOURCE_DIR}/include/sensor_msgs/msg
-        ${PROJECT_SOURCE_DIR}/include/shape_msgs/msg
-        ${PROJECT_SOURCE_DIR}/include/statistics_msgs/msg
-        ${PROJECT_SOURCE_DIR}/include/std_msgs/msg
-        ${PROJECT_SOURCE_DIR}/include/tf2_msgs/action
-        ${PROJECT_SOURCE_DIR}/include/tf2_msgs/msg
-        ${PROJECT_SOURCE_DIR}/include/unique_identifier_msgs/msg
-        ${PROJECT_BINARY_DIR}/include
-        ${PROJECT_BINARY_DIR}/src
-        ${PROJECT_SOURCE_DIR}/include
-        ${CMAKE_BINARY_DIR}/include)
