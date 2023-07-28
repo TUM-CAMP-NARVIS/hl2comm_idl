@@ -1,0 +1,48 @@
+#ifndef PCPD_MSG_HL2SENSORINFO
+#define PCPD_MSG_HL2SENSORINFO
+
+#include "pcpd_msgs/msg/Types.idl"
+#include "std_msgs/msg/Header.idl"
+#include "geometry_msgs/msg/Vector3.idl"
+#include "geometry_msgs/msg/Quaternion.idl"
+
+module pcpd_msgs {
+  module msg {
+
+    struct Hololens2SensorInfoVLC {
+
+      std_msgs::msg::Header header;
+
+      sequence<float> uv2x;
+      sequence<float> uv2y;
+
+      sequence<float> mapx;
+      sequence<float> mapy;
+
+      float__4 K;
+
+      geometry_msgs::msg::Vector3 position;
+      geometry_msgs::msg::Quaternion orientation;
+    };
+
+
+    struct Hololens2SensorIntrinsicsPV {
+
+      std_msgs::msg::Header header;
+
+      uint16 width;
+      uint16 height;
+
+      float__2 focal_length;
+      float__2 principal_point;
+      
+      float__3 radial_distortion;
+      float__2 tangential_distortion;
+
+      float__16 undistorted_projection_transform;
+    };
+
+  };
+};
+
+#endif

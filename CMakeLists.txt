@@ -149,11 +149,16 @@ set(HL2COMM_IDL_IDL_SHAPE
         )
 
 set(HL2COMM_IDL_IDL_PCPD
+        "idl/pcpd_msgs/msg/Types.idl"
         "idl/pcpd_msgs/msg/Instance.idl"
         "idl/pcpd_msgs/msg/DataflowBufferInfo.idl"
         "idl/pcpd_msgs/msg/CameraSensor.idl"
         "idl/pcpd_msgs/msg/Hololens2EyeTracking.idl"
         "idl/pcpd_msgs/msg/Hololens2HandTracking.idl"
+        "idl/pcpd_msgs/msg/Hololens2H26xVideoStream.idl"
+        "idl/pcpd_msgs/msg/Hololens2AACAudioStream.idl"
+        "idl/pcpd_msgs/msg/Hololens2RemoteControl.idl"
+        "idl/pcpd_msgs/msg/Hololens2Sensors.idl"
         )
 
 if (BUILD_SHARED_LIBS)
@@ -186,6 +191,7 @@ target_include_directories(hl2comm_idl_std PUBLIC
         )
 set_target_properties(hl2comm_idl_std PROPERTIES CXX_STANDARD 17)
 target_compile_definitions(hl2comm_idl_std PRIVATE ${HL2COMM_IDL_STD_EXPORT})
+set_target_properties(hl2comm_idl_std PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 install(TARGETS hl2comm_idl_std EXPORT hl2comm_idl_stdConfig
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -221,6 +227,7 @@ target_include_directories(hl2comm_idl_geometry PUBLIC
         )
 set_target_properties(hl2comm_idl_geometry PROPERTIES CXX_STANDARD 17)
 target_compile_definitions(hl2comm_idl_geometry PRIVATE ${HL2COMM_IDL_GEOMETRY_EXPORT})
+set_target_properties(hl2comm_idl_geometry PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 install(TARGETS hl2comm_idl_geometry EXPORT hl2comm_idl_geometryConfig
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -258,6 +265,7 @@ target_include_directories(hl2comm_idl_pcpd PUBLIC
         )
 set_target_properties(hl2comm_idl_pcpd PROPERTIES CXX_STANDARD 17)
 target_compile_definitions(hl2comm_idl_pcpd PRIVATE ${HL2COMM_IDL_PCPD_EXPORT})
+set_target_properties(hl2comm_idl_pcpd PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 install(TARGETS hl2comm_idl_pcpd EXPORT hl2comm_idl_pcpdConfig
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -292,6 +300,7 @@ target_include_directories(hl2comm_idl_rosgraph PUBLIC
         )
 set_target_properties(hl2comm_idl_rosgraph PROPERTIES CXX_STANDARD 17)
 target_compile_definitions(hl2comm_idl_rosgraph PRIVATE ${HL2COMM_IDL_ROSGRAPH_EXPORT})
+set_target_properties(hl2comm_idl_rosgraph PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 install(TARGETS hl2comm_idl_rosgraph EXPORT hl2comm_idl_rosgraphConfig
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -330,6 +339,7 @@ target_include_directories(hl2comm_idl_sensor PUBLIC
         )
 set_target_properties(hl2comm_idl_sensor PROPERTIES CXX_STANDARD 17)
 target_compile_definitions(hl2comm_idl_sensor PRIVATE ${HL2COMM_IDL_SENSOR_EXPORT})
+set_target_properties(hl2comm_idl_sensor PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 install(TARGETS hl2comm_idl_sensor EXPORT hl2comm_idl_sensorConfig
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -368,6 +378,7 @@ target_include_directories(hl2comm_idl_shape PUBLIC
         )
 set_target_properties(hl2comm_idl_shape PROPERTIES CXX_STANDARD 17)
 target_compile_definitions(hl2comm_idl_shape PRIVATE ${HL2COMM_IDL_SHAPE_EXPORT})
+set_target_properties(hl2comm_idl_shape PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 install(TARGETS hl2comm_idl_shape EXPORT hl2comm_idl_shapeConfig
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -404,6 +415,7 @@ target_include_directories(hl2comm_idl_statistics PUBLIC
         )
 set_target_properties(hl2comm_idl_statistics PROPERTIES CXX_STANDARD 17)
 target_compile_definitions(hl2comm_idl_statistics PRIVATE ${HL2COMM_IDL_STATISTICS_EXPORT})
+set_target_properties(hl2comm_idl_statistics PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 install(TARGETS hl2comm_idl_statistics EXPORT hl2comm_idl_statisticsConfig
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -443,6 +455,7 @@ target_include_directories(hl2comm_idl_tf2 PUBLIC
         )
 set_target_properties(hl2comm_idl_tf2 PROPERTIES CXX_STANDARD 17)
 target_compile_definitions(hl2comm_idl_tf2 PRIVATE ${HL2COMM_IDL_TF2_EXPORT})
+set_target_properties(hl2comm_idl_tf2 PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 install(TARGETS hl2comm_idl_tf2 EXPORT hl2comm_idl_tf2Config
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -476,6 +489,7 @@ target_include_directories(hl2comm_idl_unique_identifier PUBLIC
         )
 set_target_properties(hl2comm_idl_unique_identifier PROPERTIES CXX_STANDARD 17)
 target_compile_definitions(hl2comm_idl_unique_identifier PRIVATE ${HL2COMM_IDL_UNIQUE_IDENTIFIER_EXPORT})
+set_target_properties(hl2comm_idl_unique_identifier PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 install(TARGETS hl2comm_idl_unique_identifier EXPORT hl2comm_idl_unique_identifierConfig
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}

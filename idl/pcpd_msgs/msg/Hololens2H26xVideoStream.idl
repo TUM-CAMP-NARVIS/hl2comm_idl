@@ -1,0 +1,49 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from sensor_msgs/msg/Image.msg
+// generated code does not contain a copyright notice
+
+#include "pcpd_msgs/msg/Types.idl"
+#include "std_msgs/msg/Header.idl"
+#include "geometry_msgs/msg/Vector3.idl"
+#include "geometry_msgs/msg/Quaternion.idl"
+
+module pcpd_msgs {
+  module msg {
+
+    struct Hololens2H26xStreamDescriptor {
+
+      string stream_topic;
+      Hololens2SensorType sensor_type;
+      uint8 frame_rate;
+
+      uint32 image_height;
+      uint32 image_width;
+      uint32 image_step;
+
+      Hololens2H26xProfile h26x_profile;
+      uint32 h26x_bitrate;
+
+      geometry_msgs::msg::Vector3 position;
+      geometry_msgs::msg::Quaternion orientation;
+
+    };
+
+    struct Hololens2H26xVideoStream {
+
+      std_msgs::msg::Header header;
+
+      geometry_msgs::msg::Vector3 position;
+      geometry_msgs::msg::Quaternion orientation;
+
+      float__2 camera_focal_length;
+      float__2 camera_principal_point;
+      
+      float__3 camera_radial_distortion;
+      float__2 camera_tangential_distortion;
+
+      uint64 data_size;
+      sequence<uint8> data;
+
+    };
+  };
+};

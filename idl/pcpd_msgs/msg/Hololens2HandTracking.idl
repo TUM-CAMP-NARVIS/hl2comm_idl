@@ -1,6 +1,8 @@
 #ifndef PCPD_MSG_HANDTRACKING
 #define PCPD_MSG_HANDTRACKING
 
+#include "pcpd_msgs/msg/Types.idl"
+#include "std_msgs/msg/Header.idl"
 #include "geometry_msgs/msg/Vector3.idl"
 #include "geometry_msgs/msg/Quaternion.idl"
 
@@ -15,17 +17,9 @@ module pcpd_msgs {
       int32 accuracy;
     };
 
-
-
-    @verbatim (language="comment", text=
-      "This represents a sample from the hololens handtracking.")
     struct Hololens2HandTracking {
-      @verbatim (language="comment", text=
-        "Realtime hand-tracking measurement for a specific timestamp.")
 
-
-      string client_id;
-      uint64 timestamp;
+      std_msgs::msg::Header header;
 
       geometry_msgs::msg::Vector3 head_position;
       geometry_msgs::msg::Vector3 head_forward;
@@ -33,7 +27,6 @@ module pcpd_msgs {
 
       geometry_msgs::msg::Vector3 gaze_origin;
       geometry_msgs::msg::Vector3 gaze_direction;
-
       
       sequence<HandJointPose> left_poses;
       sequence<HandJointPose> right_poses;

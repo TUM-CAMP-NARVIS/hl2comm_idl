@@ -1,12 +1,11 @@
 #ifndef PCPD_MSG_HL2EYETRACKING
 #define PCPD_MSG_HL2EYETRACKING
 
+#include "pcpd_msgs/msg/Types.idl"
 #include "geometry_msgs/msg/Vector3.idl"
 
 module pcpd_msgs {
   module msg {
-
-    typedef float float__16[16];
 
     @verbatim (language="comment", text=
       "This represents a sample from the hololens eyetracking.")
