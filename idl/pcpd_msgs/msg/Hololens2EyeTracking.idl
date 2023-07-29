@@ -2,22 +2,19 @@
 #define PCPD_MSG_HL2EYETRACKING
 
 #include "pcpd_msgs/msg/Types.idl"
+#include "std_msgs/msg/Header.idl"
 #include "geometry_msgs/msg/Vector3.idl"
+#include "geometry_msgs/msg/Quaternion.idl"
 
 module pcpd_msgs {
   module msg {
 
-    @verbatim (language="comment", text=
-      "This represents a sample from the hololens eyetracking.")
     struct Hololens2EyeTracking {
-      @verbatim (language="comment", text=
-        "Realtime eye-tracking measurement for a specific timestamp.")
 
-
-      string client_id;
-      uint64 timestamp;
-      float__16 pose;
-
+      std_msgs::msg::Header header;
+      
+      geometry_msgs::msg::Vector3 position;
+      geometry_msgs::msg::Quaternion orientation;
 
       geometry_msgs::msg::Vector3 c_origin;
       geometry_msgs::msg::Vector3 c_direction;

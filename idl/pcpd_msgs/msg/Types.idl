@@ -21,6 +21,7 @@ module pcpd_msgs {
 
     enum Hololens2ImageCompression {
         CompressionType_Raw,
+        CompressionType_Png,
         CompressionType_H26x,
         CompressionType_Zdepth
     };
@@ -44,6 +45,7 @@ module pcpd_msgs {
     enum Hololens2SensorType {
         PERSONAL_VIDEO,
         EYE_TRACKING,
+        MICROPHONE,
         RM_LEFT_FRONT,
         RM_LEFT_LEFT,
         RM_RIGHT_FRONT,
