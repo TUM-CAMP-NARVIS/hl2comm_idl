@@ -155,8 +155,8 @@ set(HL2COMM_IDL_IDL_PCPD
         "idl/pcpd_msgs/msg/CameraSensor.idl"
         "idl/pcpd_msgs/msg/Hololens2EyeTracking.idl"
         "idl/pcpd_msgs/msg/Hololens2HandTracking.idl"
-        "idl/pcpd_msgs/msg/Hololens2H26xVideoStream.idl"
-        "idl/pcpd_msgs/msg/Hololens2AACAudioStream.idl"
+        "idl/pcpd_msgs/msg/Hololens2VideoStream.idl"
+        "idl/pcpd_msgs/msg/Hololens2AudioStream.idl"
         "idl/pcpd_msgs/msg/Hololens2RemoteControl.idl"
         "idl/pcpd_msgs/msg/Hololens2Sensors.idl"
         )

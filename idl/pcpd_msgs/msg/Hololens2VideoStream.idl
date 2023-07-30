@@ -20,8 +20,8 @@ module pcpd_msgs {
       float__3 camera_radial_distortion;
       float__2 camera_tangential_distortion;
 
-      uint64 data_size;
-      sequence<uint8> data;
+      uint64 image_bytes;
+      sequence<uint8> image;
 
     };
   };
