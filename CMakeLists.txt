@@ -163,6 +163,8 @@ set(HL2COMM_IDL_IDL_PCPD
 set(HL2COMM_IDL_IDL_PCPD_RPC
         "idl/pcpd_msgs/rpc/Types.idl"
         "idl/pcpd_msgs/rpc/Hololens2RemoteControl.idl"
+        "idl/pcpd_msgs/rpc/Hololens2SpatialMapping.idl"
+        "idl/pcpd_msgs/rpc/Hololens2SceneUnderstanding.idl"
         )
 
 if (BUILD_SHARED_LIBS)
