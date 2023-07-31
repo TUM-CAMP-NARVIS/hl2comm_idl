@@ -166,6 +166,7 @@ set(HL2COMM_IDL_IDL_PCPD_RPC
         "idl/pcpd_msgs/rpc/Hololens2SpatialMapping.idl"
         "idl/pcpd_msgs/rpc/Hololens2SceneUnderstanding.idl"
         "idl/pcpd_msgs/rpc/Hololens2VoiceInput.idl"
+        "idl/pcpd_msgs/rpc/Hololens2Manager.idl"
         )
 
 if (BUILD_SHARED_LIBS)

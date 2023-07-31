@@ -1,0 +1,47 @@
+#ifndef PCPD_RPC_HL2MANAGER
+#define PCPD_RPC_HL2MANAGER
+
+#include "pcpd_msgs/rpc/Types.idl"
+#include "pcpd_msgs/msg/Types.idl"
+#include "std_msgs/msg/Header.idl"
+
+module pcpd_msgs {
+  module rpc {
+
+    struct Hololens2Presence {
+        std_msgs::msg::Header header;
+        uint64 heart_beat_counter;
+    };
+
+    struct HL2MGRRequest_StartRM {
+      boolean enable_location;
+      boolean enable_left_front;
+      boolean enable_left_left;
+      boolean enable_right_front;
+      boolean enable_right_right;
+      pcpd_msgs::msg::Hololens2H26xProfile vlc_format;
+
+      boolean enable_depth_ahat;
+      boolean enable_depth_long_throw;
+      pcpd_msgs::msg::Hololens2H26xProfile depth_format;
+
+      boolean enable_imu_accel;
+      boolean enable_imu_gyro;
+      boolean enable_imu_mag;
+    };
+
+    struct HL2MGRRequest_StartPV {
+      boolean enable_location;
+      pcpd_msgs::msg::Hololens2H26xProfile pv_format;
+    };
+
+    struct HL2MGRRequest_StartMC {
+      pcpd_msgs::msg::Hololens2AACProfile aac_format;
+
+    };
+
+
+  };
+};
+
+#endif
