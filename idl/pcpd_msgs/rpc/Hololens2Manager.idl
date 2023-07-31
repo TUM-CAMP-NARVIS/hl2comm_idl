@@ -13,17 +13,29 @@ module pcpd_msgs {
         uint64 heart_beat_counter;
     };
 
+    struct HL2MGR_H26xFormat {
+      uint16 width;
+      uint16 height;
+      uint8 frame_rate;
+      pcpd_msgs::msg::Hololens2H26xProfile profile;
+      uint32 bitrate;
+    };
+
+    struct HL2MGR_AACFormat {
+      pcpd_msgs::msg::Hololens2AACProfile aac_profile;
+    };
+
     struct HL2MGRRequest_StartRM {
       boolean enable_location;
       boolean enable_left_front;
       boolean enable_left_left;
       boolean enable_right_front;
       boolean enable_right_right;
-      pcpd_msgs::msg::Hololens2H26xProfile vlc_format;
+      HL2MGR_H26xFormat vlc_format;
 
       boolean enable_depth_ahat;
       boolean enable_depth_long_throw;
-      pcpd_msgs::msg::Hololens2H26xProfile depth_format;
+      HL2MGR_H26xFormat depth_format;
 
       boolean enable_imu_accel;
       boolean enable_imu_gyro;
@@ -36,8 +48,9 @@ module pcpd_msgs {
     };
 
     struct HL2MGRRequest_StartMC {
-      pcpd_msgs::msg::Hololens2AACProfile aac_format;
-
+      uint32 channels;
+      uint32 sample_rate;
+      HL2MGR_AACFormat aac_format;
     };
 
 
