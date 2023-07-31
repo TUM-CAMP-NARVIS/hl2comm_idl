@@ -11,7 +11,6 @@ module pcpd_msgs {
     typedef float float__12[12];
     typedef float float__16[16];
 
-
     enum Hololens2PixelFormat {
       PixelFormat_NV12,
       PixelFormat_ARGB,
