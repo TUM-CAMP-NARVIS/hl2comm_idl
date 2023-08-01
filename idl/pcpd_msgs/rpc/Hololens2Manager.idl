@@ -8,6 +8,11 @@
 module pcpd_msgs {
   module rpc {
 
+    struct Hololens2LogMessage {
+        std_msgs::msg::Header header;
+        sequence<string> messages;
+    };
+
     struct Hololens2Presence {
         std_msgs::msg::Header header;
         uint64 heart_beat_counter;
@@ -22,7 +27,9 @@ module pcpd_msgs {
     };
 
     struct HL2MGR_AACFormat {
-      pcpd_msgs::msg::Hololens2AACProfile aac_profile;
+      uint32 channels;
+      uint32 sample_rate;
+      pcpd_msgs::msg::Hololens2AACProfile profile;
     };
 
     struct HL2MGRRequest_StartRM {
@@ -44,12 +51,10 @@ module pcpd_msgs {
 
     struct HL2MGRRequest_StartPV {
       boolean enable_location;
-      pcpd_msgs::msg::Hololens2H26xProfile pv_format;
+      HL2MGR_H26xFormat pv_format;
     };
 
     struct HL2MGRRequest_StartMC {
-      uint32 channels;
-      uint32 sample_rate;
       HL2MGR_AACFormat aac_format;
     };
 
